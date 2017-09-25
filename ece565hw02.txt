@@ -1,0 +1,48 @@
+State: Running
+PID:    12
+pPID:   1
+PC:    8000
+AX:    12
+BX:    12
+CX:    12
+DX:    12
+Pr:    3
+ST:    00:15
+CPU:   6 
+
+State: Ready
+PID:    11
+pPID:   1
+PC:    2000
+AX:    11
+BX:    11
+CX:    11
+DX:    11
+Pr:    2
+ST:    00:09
+CPU:   2
+
+State: Ready
+PID:    111
+pPID:   11
+PC:    5000
+AX:    111
+BX:    111
+CX:    111
+DX:    111
+Pr:    1
+ST:    00:11
+CPU:   4
+
+State: Blocked
+PID:    1
+pPID:   0
+PC:    1000
+AX:    1
+BX:    1
+CX:    1
+DX:    1
+Pr:    4
+ST:    00:01
+CPU:   8
+
