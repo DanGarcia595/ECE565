@@ -11,6 +11,8 @@ import (
 )
 
 var physicalsize = 8
+var offsetsize uint = 1
+var vaddrsize uint = 5
 
 func main(){
 	file, err := os.Open("ece565hw03.txt") // just pass the file name
@@ -42,12 +44,12 @@ func main(){
 
 func generateAdresses(out chan<- int){
 	for{
-		adr := rand.Intn(32)
+		adr := rand.Intn((1<<vaddrsize)-1)
 		fmt.Print("Virtual Address: ")
 		fmt.Printf("%02d",adr)
 		fmt.Print(" | ")
 		out <- adr
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * 1)
 	}
 }
 
@@ -57,8 +59,8 @@ func translateAdress(physicaltable []bool,pagetable [][]string, in <-chan int){
 	for{
 		found = false
 		vaddress := <-in 
-		page := vaddress >> 1
-		offset := vaddress % 2
+		page := vaddress >> offsetsize
+		offset := vaddress % (1<<offsetsize)
 		valid := pagetable[page][1]
 		fmt.Print("Page: ")
 		fmt.Printf("%02d",page)
@@ -68,8 +70,7 @@ func translateAdress(physicaltable []bool,pagetable [][]string, in <-chan int){
 			if err != nil {
 				fmt.Print(err)
 			}
-			paddress := frame << 1
-			paddress += offset
+			paddress := (frame << offsetsize) + offset
 			fmt.Println(" Physical Address ",paddress)
 		}else{
 			fmt.Print(" Page fault! Adding page to table | ")
