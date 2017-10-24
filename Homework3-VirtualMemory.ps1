@@ -24,7 +24,7 @@ function main{
     $powershell1.Runspace = $runspace1
     $powershell1.AddScript({
         while($hash.Flag){
-            $address = Get-Random -Minimum 0 -Maximum 4
+            $address = Get-Random -Minimum 0 -Maximum 16
             $hash.host.ui.Write("Virtual Address: $address generated | ")
             $hash.queue.Enqueue($address)
             Start-Sleep 1
